@@ -10,7 +10,12 @@ def calculate_error(E_recv):
     return error
 
 def get_value_from_sensor():
-    return None
+    min = 3.3
+    max = 4.4
+    curr = max
+    while(curr!=min):
+        curr = curr-0.01
+        yield curr
 
 def get_sum_of_n_numbers(n):
     return ((n*(n+1))/2)
@@ -57,6 +62,8 @@ def calculate_stride_start_stop_normal_period(expected) -> tuple:
     return start, stop, s, error_range
 
 
+
+
 def main():
     print("PRINTING LARGER PERIOD VERSION:")
     start,stop,stride,error = calculate_stride_start_stop_larger_period(4.00)
@@ -77,8 +84,13 @@ def main():
     for i in error:
         print("{:.2f}".format(4.00-i))
 
-    # current_value = get_value_from_sensor()
-    # error = calculate_error(current_value)
+
+    for i in get_value_from_sensor():
+        if(i <= 3.3):
+            break
+        error = calculate_error(i)
+        print("Error: {}".format(error))
+    
     # change_period(error)
 
 

@@ -17,6 +17,17 @@ def get_error_range_normal(MaxError, numPeriod) -> list:
         error.append(diff*i)
     return error
 
+def get_error_range_biased(MaxError, numPeriod) -> list:
+    diff = (MaxError/((numPeriod*(numPeriod+1)/2)))
+    error = [0]
+    curr=0
+    for i in range(0,numPeriod):
+        curr += diff*((numPeriod)-i)
+        error.append(curr)
+
+    return error
+
+
 def period_from_error(error, curr_error) -> int:
     index=0
     for i in range(0,len(error)):
@@ -28,7 +39,11 @@ def period_from_error(error, curr_error) -> int:
 
 def main():
     seed(time.time())
+    
+    error_range_biased = get_error_range_biased(3,len(period))
+    print(error_range_biased)
     error_range = get_error_range_normal(3,len(period))
+    print(error_range)
     prev = 33.00
     a = time.time()
     for i in range(0,10):

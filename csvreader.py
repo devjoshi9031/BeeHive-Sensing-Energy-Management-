@@ -13,7 +13,7 @@ def read_csv_file(csvfilename, NumberOfSamples) -> list:
             #     break
             rows.append(float(row[1]))
             counter+=1
-    return rows
+    return rows[:NumberOfSamples]
 
 
 

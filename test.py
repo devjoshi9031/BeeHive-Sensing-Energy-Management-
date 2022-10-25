@@ -1,7 +1,7 @@
 import os, sys, time
 from csvreader import read_csv_file
 from battery_changing_period import *
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 period = [10,20,30,40,50,60]
 
@@ -11,7 +11,7 @@ def simulate_original_condition(error,start,stop,stride, msg, desired_voltage):
     a = [0]*6
     p = []
     pta = time.time()
-    for i in current_values:
+    for i in get_value_from_sensor():
         error_val = calculate_error(desired_voltage, i)
         for ii in range(0,len(error)):
             if(error[ii]>=error_val):
@@ -54,10 +54,6 @@ def main():
 
 
     
-    plt.bar(period, p_normal, width=.5)
-    plt.xlabel("error")
-    plt.ylabel("Period")
-    plt.show()
 
 
 

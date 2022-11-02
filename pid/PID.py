@@ -55,11 +55,13 @@ class PID:
         self.DTerm = 0.0
         self.last_error = 0.0
 
+        
         # Windup Guard
         self.int_error = 0.0
         self.windup_guard = 20.0
 
         self.output = 0.0
+        self.last_time = time.time()
 
     def update(self, feedback_value, current_time=None):
         """Calculates PID value for given reference feedback
